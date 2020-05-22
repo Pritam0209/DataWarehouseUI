@@ -13,7 +13,7 @@ sap.ui.define([
 		 */
 
 		onInit: function () {
-			this.previousSelected = "countryDimension";
+			this.previousSelected = "country";
 			this.getView().byId("dimension").setSelectedKey("countryDimension");
 			var dimensionName = this.getView().byId("dimension").getSelectedKey();
 			this.changeDimensionBinding(dimensionName);
@@ -26,10 +26,10 @@ sap.ui.define([
 				key: "{value}",
 				text: "{value}"
 			});
-			var url1 = "http://127.0.0.1:3005/unique";
+			var url1 = "http://127.0.0.1:5000/uniqueValues";
 			var jsonData = [];
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url: url1,
 				data: jsonData,
 				cors: true,
@@ -49,12 +49,12 @@ sap.ui.define([
 		bindFactTable: function () {
 			//console.log("here");
 			var oTable = this.getView().byId("fact");
-			var url1 = "http://127.0.0.1:3005/table";
+			var url1 = "http://127.0.0.1:5000/dimensionTable";
 			var jsonData = {
 				"Table": "fact"
 			};
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url: url1,
 				data: jsonData,
 				cors: true,
@@ -74,12 +74,12 @@ sap.ui.define([
 		changeDimensionBinding: function (DimensionName) {
 			var that = this;
 			var oTable = this.getView().byId(DimensionName);
-			var url1 = "http://127.0.0.1:3005/table";
+			var url1 = "http://127.0.0.1:5000/dimensionTable";
 			var jsonData = {
 				"Table": DimensionName
 			};
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url: url1,
 				data: jsonData,
 				cors: true,
@@ -113,12 +113,12 @@ sap.ui.define([
 				key: "{value}",
 				text: "{value}"
 			});
-			var url1 = "http://127.0.0.1:3005/unique";
+			var url1 = "http://127.0.0.1:5000/uniqueValues";
 			var jsonData =[{
-				"country": country
+				"countryName": country
 			}];
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url: url1,
 				data: jsonData,
 				cors: true,
@@ -143,14 +143,14 @@ sap.ui.define([
 				key: "{value}",
 				text: "{value}"
 			});
-			var url1 = "http://127.0.0.1:3005/unique";
+			var url1 = "http://127.0.0.1:5000/uniqueValues";
 			var jsonData =[{
-				"country": country
+				"countryName": country
 			}, {
 				"fromYear": fromYear
 			}];
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url: url1,
 				data: jsonData,
 				cors: true,
@@ -176,7 +176,7 @@ sap.ui.define([
 				key: "{value}",
 				text: "{value}"
 			});
-			var url1 = "http://127.0.0.1:3005/unique";
+			var url1 = "http://127.0.0.1:5000/uniqueValues";
 			var jsonData = [{
 				"country": country
 			}, {
@@ -185,7 +185,7 @@ sap.ui.define([
 				"toYear": toYear
 			}];
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url: url1,
 				data: jsonData,
 				cors: true,
@@ -212,7 +212,7 @@ sap.ui.define([
 				key: "{value}",
 				text: "{value}"
 			});
-			var url1 = "http://127.0.0.1:3005/unique";
+			var url1 = "http://127.0.0.1:5000/uniqueValues";
 			var jsonData = [{
 				"country": country
 			}, {
@@ -223,7 +223,7 @@ sap.ui.define([
 				"element": element
 			}];
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url: url1,
 				data: jsonData,
 				cors: true,
@@ -256,7 +256,7 @@ sap.ui.define([
 			};
 			var oTable=this.getView().byId("queryTable");
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url: url1,
 				data: jsonData,
 				cors: true,

@@ -18,52 +18,87 @@ sap.ui.define([
 		 */
 
 		onInit: function () {
-
+			
+			this.getUniqueValue("c2Category","categoryname","category");
+			this.getUniqueValue("crop","categoryname","category");
+			this.getUniqueValue("country","countryname","countryname");
+			this.getUniqueValue("c2Year","yearvalue","timedimension");
 			// InitPageUtil.initPageSettings(this.getView());
+		},
+		getUniqueValue: function (selectlist,colName,tableName) {
+			var selectList = this.getView().byId(selectlist);
+			var oItemSelectTemplate = new sap.ui.core.Item({
+				key: "{value}",
+				text: "{value}"
+			});
+			var url1 = "http://127.0.0.1:5000/uniqueByColumnName";
+			var jsonData = {
+				"column": colName,
+				"table":tableName
+			};
+			$.ajax({
+				type: "POST",
+				url: url1,
+				data: jsonData,
+				cors: true,
+				secure: true,
+				async: true,
+				headers: {
+					'Access-Control-Allow-Origin': '*'
+				},
+				success: function (data, textStatus, jqXHR) {
+					var oModel = new JSONModel();
+					oModel.setData(data);
+					selectList.setModel(oModel);
+					selectList.bindAggregation("items", "/", oItemSelectTemplate);
+				}
+			});
 		},
 		onLoad: function () {
 			Format.numericFormatter(ChartFormatter.getInstance());
 			var formatPattern = ChartFormatter.DefaultPattern;
 			var ovizframe = this.getView().byId("idVizFrame1");
-			// var url1 = "http://127.0.0.1:3005/prevdata/";
-			// $.ajax({
-			// 	type: "GET",
-			// 	dataType: "json",
-			// 	url: url1,
-			// 	cors: true,
-			// 	secure: true,
-			// 	async: false,
-			// 	headers: {
-			// 		'Access-Control-Allow-Origin': '*'
-			// 	},
-			// 	success: function (data, textStatus, jqXHR) {
-			// 		var oModel1 = new JSONModel();
-			// 		oModel1.setData(data);
-			// 		ovizframe.setModel(oModel1);
-			// 	}
-			// });
-			var data = [{
-				"year": "2017",
-				"Seed": 3750,
-				"Yield": 2000,
-				"Production": 5000,
-				"areaHarvested": 400
-			}, {
-				"year": "2018",
-				"Seed": 2000,
-				"Yield": 0,
-				"Production": 4800,
-				"areaHarvested": 300
-			}, {
-				"year": "2019",
-				"Seed": 1500,
-				"Yield": 2000,
-				"Production": 3800,
-				"areaHarvested": 200
-			}];
-			var oModel1 = new JSONModel();
-			oModel1.setData(data);
-			ovizframe.setModel(oModel1);
+			var category=this.getView().byId("crop");
+			var country=this.getView().byId("country");
+			var url1 = "http://127.0.0.1:5000/lineChartData";
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: url1,
+				cors: true,
+				secure: true,
+				async: false,
+				headers: {
+					'Access-Control-Allow-Origin': '*'
+				},
+				success: function (data, textStatus, jqXHR) {
+					var oModel1 = new JSONModel();
+					oModel1.setData(data);
+					ovizframe.setModel(oModel1);
+				}
+			});
+			// var data = [{
+			// 	"year": "2017",
+			// 	"Seed": 3750,
+			// 	"Yield": 2000,
+			// 	"Production": 5000,
+			// 	"areaHarvested": 400
+			// }, {
+			// 	"year": "2018",
+			// 	"Seed": 2000,
+			// 	"Yield": 0,
+			// 	"Production": 4800,
+			// 	"areaHarvested": 300
+			// }, {
+			// 	"year": "2019",
+			// 	"Seed": 1500,
+			// 	"Yield": 2000,
+			// 	"Production": 3800,
+			// 	"areaHarvested": 200
+			// }];
+			// var oModel1 = new JSONModel();
+			// oModel1.setData(data);
+			// ovizframe.setModel(oModel1);
 			var oVizPop = this.getView().byId("idPopOver2");
 			ovizframe.setVizProperties({
 				plotArea: {
@@ -97,51 +132,51 @@ sap.ui.define([
 			Format.numericFormatter(ChartFormatter.getInstance());
 			var formatPattern = ChartFormatter.DefaultPattern;
 			var ovizframe = this.getView().byId("idVizFrame2");
-			var country=this.getView().byId("country");
-			var crop=this.getView().byId("crop");
+			var category=this.getView().byId("c2Category");
+			var year=this.getView().byId("c2Year");
 			var JSONdata={
-				"country":country,
-				"crop":crop
+				"category":category,
+				"year":year
 			};
-			 var url1 = "http://127.0.0.1:3005/analysis1";
-			// $.ajax({
-			// 	type: "GET",
-			// 	url: url1,
-			// 	data:JSONdata,
-			// 	cors: true,
-			// 	secure: true,
-			// 	async: false,
-			// 	headers: {
-			// 		'Access-Control-Allow-Origin': '*'
-			// 	},
-			// 	success: function (data, textStatus, jqXHR) {
-			// 		var oModel1 = new JSONModel();
-			// 		oModel1.setData(data);
-			// 		ovizframe.setModel(oModel1);
-			// 	}
-			// });
-			var data = [{
-				"country": "India",
-				"Seed": 3750,
-				"Yield": 2000,
-				"Production": 5000,
-				"areaHarvested": 4000
-			}, {
-				"country": "China",
-				"Seed": 2000,
-				"Yield": 3000,
-				"Production": 4800,
-				"areaHarvested": 3000
-			}, {
-				"country": "America",
-				"Seed": 1500,
-				"Yield": 2000,
-				"Production": 3800,
-				"areaHarvested": 2000
-			}];
-			var oModel1 = new JSONModel();
-			oModel1.setData(data);
-			ovizframe.setModel(oModel1);
+			 var url1 = "http://127.0.0.1:5000/barGraphData";
+			$.ajax({
+				type: "POST",
+				url: url1,
+				data:JSONdata,
+				cors: true,
+				secure: true,
+				async: false,
+				headers: {
+					'Access-Control-Allow-Origin': '*'
+				},
+				success: function (data, textStatus, jqXHR) {
+					var oModel1 = new JSONModel();
+					oModel1.setData(data);
+					ovizframe.setModel(oModel1);
+				}
+			});
+			// var data = [{
+			// 	"country": "India",
+			// 	"Seed": 3750,
+			// 	"Yield": 2000,
+			// 	"Production": 5000,
+			// 	"areaHarvested": 4000
+			// }, {
+			// 	"country": "China",
+			// 	"Seed": 2000,
+			// 	"Yield": 3000,
+			// 	"Production": 4800,
+			// 	"areaHarvested": 3000
+			// }, {
+			// 	"country": "America",
+			// 	"Seed": 1500,
+			// 	"Yield": 2000,
+			// 	"Production": 3800,
+			// 	"areaHarvested": 2000
+			// }];
+			// var oModel1 = new JSONModel();
+			// oModel1.setData(data);
+			// ovizframe.setModel(oModel1);
 			var oVizPop = this.getView().byId("idPopOver3");
 			ovizframe.setVizProperties({
 				categoryAxis: {

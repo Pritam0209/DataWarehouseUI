@@ -12,85 +12,85 @@
 										<items>
 											<Label text="Select Dimension" width="100%" id="label2" class="sapUiMediumMarginBeginEnd"/>
 											<Select id="dimension" change="onDimensionSelect">
-												<core:ListItem key="countryDimension" text="Country"/>
-												<core:ListItem key="timeDimension" text="Time"/>
-												<core:ListItem key="elementDimension" text="Element"/>
-												<core:ListItem key="categoryDimension" text="Category"/>
+												<core:ListItem key="country" text="Country"/>
+												<core:ListItem key="time" text="Time"/>
+												<core:ListItem key="element" text="Element"/>
+												<core:ListItem key="category" text="Category"/>
 											</Select>
 										</items>
 									</HBox>
-									<Table id="countryDimension" items="{/}">
+									<Table id="country" items="{/}">
 										<columns>
 											<Column>
-												<Label text="Country Name"/>
+												<Label text="Country Id"/>
 											</Column>
 											<Column >
-												<Label text="Surrogate Key"/>
+												<Label text="Country Name"/>
 											</Column>
 										</columns>
 										<items>
 											<ColumnListItem>
 												<cells>
-													<Text id="countryName" text="{countryName}"/>
-													<Text id="Skey" text="{sKey}"/>
+													<Text id="countryId" text="{countryid}"/>
+													<Text id="countryValue" text="{countryvalue}"/>
 												</cells>
 											</ColumnListItem>
 										</items>
 									</Table>
-									<Table id="timeDimension" visible="false" items="{/}">
+									<Table id="time" visible="false" items="{/}">
 										<columns>
 											<Column>
-												<Label text="year"/>
+												<Label text="Year Id"/>
 											</Column>
 											<Column>
-												<Label text="Surrogate Key"/>
+												<Label text="Year"/>
 											</Column>
 										</columns>
 										<items>
 											<ColumnListItem>
 												<cells>
-													<Text id="year" text="{year}"/>
-													<Text id="stkey" text="{stKey}"/>
+													<Text id="year" text="{yearid}"/>
+													<Text id="stkey" text="{yearvalue}"/>
 												</cells>
 											</ColumnListItem>
 										</items>
 									</Table>
-									<Table id="elementDimension" visible="false" items="{/}">
+									<Table id="element" visible="false" items="{/}">
 										<columns>
-											<Column>
-												<Label text="Element Name"/>
-											</Column>
 											<Column>
 												<Label text="Element Id"/>
 											</Column>
 											<Column>
-												<Label text="Surrogate Key"/>
+												<Label text="Element Name"/>
+											</Column>
+											<Column>
+												<Label text="Unit"/>
 											</Column>
 										</columns>
 										<items>
 											<ColumnListItem>
 												<cells>
-													<Text id="elementName" text="{elementName}"/>
-													<Text id="elementId" text="{elementId}"/>
-													<Text id="sekey" text="{seKey}"/>
+													<Text id="elementName" text="{elementid}"/>
+													<Text id="elementId" text="{elementname}"/>
+													<Text id="sekey" text="{unit}"/>
 												</cells>
 											</ColumnListItem>
 										</items>
 									</Table>
-									<Table id="categoryDimension" visible="false" items="{/}">
+									<Table id="category" visible="false" items="{/}">
 										<columns>
 											<Column>
-												<Label text="Crops Category"/>
+												<Label text="Crops Id"/>
 											</Column>
 											<Column>
-												<Label text="Surrogate Key"/>
+												<Label text="Category Name"/>
 											</Column>
 										</columns>
 										<items>
 											<ColumnListItem>
 												<cells>
-													<Text id="categor" text="{category}"/>
-													<Text id="sckey" text="{scKey}"/>
+													<Text id="categor" text="{categoryid}"/>
+													<Text id="sckey" text="{categoryname}"/>
 												</cells>
 											</ColumnListItem>
 										</items>
@@ -102,6 +102,9 @@
 									<Table id="fact" items="{/}">
 										<columns>
 											<Column>
+												<Label text="Fact Id"/>
+											</Column>
+											<Column>
 												<Label text="Country"/>
 											</Column>
 											<Column >
@@ -109,6 +112,9 @@
 											</Column>
 											<Column>
 												<Label text="Year"/>
+											</Column>
+											<Column>
+												<Label text="Unit"/>
 											</Column>
 											<Column >
 												<Label text="Value"/>
@@ -120,11 +126,13 @@
 										<items>
 											<ColumnListItem>
 												<cells>
-													<Text id="factCountry" text="{country}"/>
-													<Text id="factElemnet" text="{element}"/>
-													<Text id="factYear" text="{year}"/>
-													<Text id="factValue" text="{value}"/>
-													<Text id="factCategory" text="{category}"/>
+													<Text id="factId" text="{fact_id}"/>
+													<Text id="factCountry" text="{CountryName}"/>
+													<Text id="factElemnet" text="{Element}"/>
+													<Text id="factYear" text="{Year}"/>
+													<Text id="factUnit" text="{Unit}"/>
+													<Text id="factValue" text="{Value}"/>
+													<Text id="factCategory" text="{Category}"/>
 												</cells>
 											</ColumnListItem>
 										</items>
