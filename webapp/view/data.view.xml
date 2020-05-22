@@ -1,0 +1,189 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="DW.DW.controller.data">
+	<App>
+		<pages>
+			<Page title="Schema View" id="page1" backgroundDesign="Solid">
+				<content>
+					<IconTabBar selectedKey="__xmlview0--filter0" id="bar0">
+						<items>
+							<IconTabFilter text="Dimension" id="filter0" icon="sap-icon://dimension" iconColor="Critical">
+								<content>
+									<HBox width="100%" id="hbox0" alignItems="Center">
+										<items>
+											<Label text="Select Dimension" width="100%" id="label2" class="sapUiMediumMarginBeginEnd"/>
+											<Select id="dimension" change="onDimensionSelect">
+												<core:ListItem key="countryDimension" text="Country"/>
+												<core:ListItem key="timeDimension" text="Time"/>
+												<core:ListItem key="elementDimension" text="Element"/>
+												<core:ListItem key="categoryDimension" text="Category"/>
+											</Select>
+										</items>
+									</HBox>
+									<Table id="countryDimension" items="{/}">
+										<columns>
+											<Column>
+												<Label text="Country Name"/>
+											</Column>
+											<Column >
+												<Label text="Surrogate Key"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Text id="countryName" text="{countryName}"/>
+													<Text id="Skey" text="{sKey}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+									<Table id="timeDimension" visible="false" items="{/}">
+										<columns>
+											<Column>
+												<Label text="year"/>
+											</Column>
+											<Column>
+												<Label text="Surrogate Key"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Text id="year" text="{year}"/>
+													<Text id="stkey" text="{stKey}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+									<Table id="elementDimension" visible="false" items="{/}">
+										<columns>
+											<Column>
+												<Label text="Element Name"/>
+											</Column>
+											<Column>
+												<Label text="Element Id"/>
+											</Column>
+											<Column>
+												<Label text="Surrogate Key"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Text id="elementName" text="{elementName}"/>
+													<Text id="elementId" text="{elementId}"/>
+													<Text id="sekey" text="{seKey}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+									<Table id="categoryDimension" visible="false" items="{/}">
+										<columns>
+											<Column>
+												<Label text="Crops Category"/>
+											</Column>
+											<Column>
+												<Label text="Surrogate Key"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Text id="categor" text="{category}"/>
+													<Text id="sckey" text="{scKey}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</content>
+							</IconTabFilter>
+							<IconTabFilter text="Fact" icon="sap-icon://document-text" id="filter1" iconColor="Negative">
+								<content>
+									<Table id="fact" items="{/}">
+										<columns>
+											<Column>
+												<Label text="Country"/>
+											</Column>
+											<Column >
+												<Label text="Element"/>
+											</Column>
+											<Column>
+												<Label text="Year"/>
+											</Column>
+											<Column >
+												<Label text="Value"/>
+											</Column>
+											<Column>
+												<Label text="Category"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Text id="factCountry" text="{country}"/>
+													<Text id="factElemnet" text="{element}"/>
+													<Text id="factYear" text="{year}"/>
+													<Text id="factValue" text="{value}"/>
+													<Text id="factCategory" text="{category}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</content>
+							</IconTabFilter>
+							<IconTabFilter text="Query" icon="sap-icon://detail-view" id="filter2" iconColor="Positive">
+								<content>
+									<HBox width="100%" id="hbox1" alignItems="Center">
+										<items>
+											<Label text="Select Counrty" width="100%" id="label21" class="sapUiMediumMarginBeginEnd"/>
+											<Select id="qCountry" change="onCountrySelect"></Select>
+											<Label text="From Year" width="100%" id="label22" class="sapUiMediumMarginBeginEnd"/>
+											<Select id="qFYear" change="onFYearSelect"></Select>
+											<Label text="To Year" width="100%" id="label23" class="sapUiMediumMarginBeginEnd"/>
+											<Select id="qTYear" change="onTYearSelect"></Select>
+											<Label text="Select element" width="100%" class="sapUiMediumMarginBeginEnd"/>
+											<Select id="qElement" change="onElementSelect"></Select>
+											<Label text="Category" width="100%" class="sapUiMediumMarginBeginEnd"/>
+											<Select id="qCategory"></Select>
+											<Button id="Display" text="Display" press="onDisplay" class="sapUiSmallMarginBeginEnd"></Button>
+										</items>
+									</HBox>
+									<Table id="queryTable">
+										<columns>
+											<Column>
+												<Label text="Country Name"/>
+											</Column>
+											<Column >
+												<Label text="Year"/>
+											</Column>
+											<Column >
+												<Label text="Element"/>
+											</Column>
+											<Column >
+												<Label text="Category"/>
+											</Column>
+											<Column >
+												<Label text="Value"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Text text="{countryName}"/>
+													<Text text="{year}"/>
+													<Text text="{element}"/>
+													<Text text="{category}"/>
+													<Text text="{value}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</content>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

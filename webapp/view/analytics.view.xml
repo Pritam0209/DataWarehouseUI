@@ -1,0 +1,77 @@
+<mvc:View controllerName="DW.DW.controller.analytics" xmlns="sap.m" xmlns:viz="sap.viz.ui5.controls" xmlns:layout="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data" height="100%">
+	<Page title="Analytics">
+		<Panel id="panel1" expandable="true" headerText="Analysis of Country's different element based on selected data" width="auto" class="sapUiResponsiveMargin" expand="onExpand1">
+			<content>
+				<HBox width="100%" id="hbox0" alignItems="Center">
+					<items>
+						<Label text="Select Country" width="100%" id="label2" class="sapUiMediumMarginBeginEnd"/>
+						<Select id="country">
+						</Select>
+						<Label text="Select Category" width="100%" id="label1" class="sapUiMediumMarginBeginEnd"/>
+						<Select id="crop">
+						</Select>
+						<Button id="LoadChart" text="Display" press="onLoad" class="sapUiSmallMarginBeginEnd"></Button>
+					</items>
+				</HBox>
+				<viz:Popover id="idPopOver2"></viz:Popover>
+				<viz:VizFrame id="idVizFrame1" selectData="myChartClickHandler" uiConfig="{applicationSet:'fiori'}" height="350px" width="100%"
+					vizType='line'>
+					<viz:dataset>
+						<viz.data:FlattenedDataset data="{/}">
+							<viz.data:dimensions>
+								<viz.data:DimensionDefinition name="Time" value="{year}"/>
+							</viz.data:dimensions>
+							<viz.data:measures>
+								<viz.data:MeasureDefinition name="AreaHarvested" value="{areaHarvested}"/>
+								<viz.data:MeasureDefinition name="Yield" value="{Yield}"/>
+								<viz.data:MeasureDefinition name="Production" value="{Production}"/>
+								<viz.data:MeasureDefinition name="Seed" value="{Seed}"/>
+							</viz.data:measures>
+						</viz.data:FlattenedDataset>
+					</viz:dataset>
+					<viz:feeds>
+						<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="AreaHarvested,Yield,Production,Seed"/>
+						<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Time" height="700px"/>
+					</viz:feeds>
+				</viz:VizFrame>
+			</content>
+		</Panel>
+		<Panel id="panel2" expandable="true" headerText="Analysis 2" width="auto" class="sapUiResponsiveMargin" expand="onExpand1">
+			<content>
+				<HBox width="100%" id="hbox1" alignItems="Center">
+					<items>
+						<Label text="Select Category" width="100%"  class="sapUiMediumMarginBeginEnd"/>
+						<Select id="c2Category">
+						</Select>
+						<Label text="Select Year" width="100%"  class="sapUiMediumMarginBeginEnd"/>
+						<Select id="c2Year">
+						</Select>
+						<Button id="LoadChart1" text="Display" press="onLoad2" class="sapUiSmallMarginBeginEnd"></Button>
+					</items>
+				</HBox>
+				<viz:Popover id="idPopOver3"></viz:Popover>
+				<viz:VizFrame id="idVizFrame2" selectData="myChartClickHandler" uiConfig="{applicationSet:'fiori'}" height="350px" width="100%"
+					vizType='column'>
+					<viz:dataset>
+						<viz.data:FlattenedDataset data="{/}">
+							<viz.data:dimensions>
+								<viz.data:DimensionDefinition name="Time" value="{country}"/>
+							</viz.data:dimensions>
+							<viz.data:measures>
+								<viz.data:MeasureDefinition name="AreaHarvested" value="{areaHarvested}"/>
+								<viz.data:MeasureDefinition name="Yield" value="{Yield}"/>
+								<viz.data:MeasureDefinition name="Production" value="{Production}"/>
+								<viz.data:MeasureDefinition name="Seed" value="{Seed}"/>
+							</viz.data:measures>
+						</viz.data:FlattenedDataset>
+					</viz:dataset>
+					<viz:feeds>
+						<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="AreaHarvested,Yield,Production,Seed"/>
+						<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Time" height="700px"/>
+					</viz:feeds>
+				</viz:VizFrame>
+			</content>
+		</Panel>
+	</Page>
+</mvc:View>

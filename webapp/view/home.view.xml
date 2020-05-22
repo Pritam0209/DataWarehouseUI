@@ -1,0 +1,32 @@
+<mvc:View controllerName="DW.DW.controller.home" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:tnt="sap.tnt" class="side-navigation-demo">
+	<tnt:ToolPage id="idapp">
+		<tnt:header>
+			<tnt:ToolHeader>
+				<ToolbarSpacer/>
+				<!--<Image src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.glassdoor.co.in%2FOverview%2FWorking-at-BITS-Pilani-EI_IE735401.11%2C22.htm&psig=AOvVaw2AUMS1KeTv2YCsnvyETknB&ust=1590215491484000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMDcyb_sxukCFQAAAAAdAAAAABAD"/>-->
+				<Text text="DW Project - Agriculture Dataset" wrapping="false"/>
+				<ToolbarSpacer/>
+				
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:sideContent>
+			<tnt:SideNavigation expanded="true" itemSelect=".onItemSelect">
+				<tnt:NavigationList items="{ path: 'side>/navigation', templateShareable: false }">
+					<tnt:NavigationListItem text="{side>title}" icon="{side>icon}" expanded="{side>expanded}"
+						items="{ path: 'side>items', templateShareable: false }" key="{side>key}">
+						<tnt:NavigationListItem text="{side>title}" key="{side>key}"></tnt:NavigationListItem>
+					</tnt:NavigationListItem>
+				</tnt:NavigationList>
+				<tnt:fixedItem>
+					<tnt:NavigationList items="{ path: 'side>/fixedNavigation', templateShareable: false }">
+						<tnt:NavigationListItem text="{side>title}" icon="{side>icon}" key="{side>key}"></tnt:NavigationListItem>
+					</tnt:NavigationList>
+				</tnt:fixedItem>
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents>
+			<App id="app"/>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</mvc:View>
